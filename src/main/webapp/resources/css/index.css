@@ -1,0 +1,10 @@
+#principal{
+    width: 800px;
+    margin: 0 auto;
+}
+
+#cuadradito{
+    margin: 200px auto;
+    width: 40%;
+    text-align: center;
+}
