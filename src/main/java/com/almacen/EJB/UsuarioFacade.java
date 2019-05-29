@@ -31,6 +31,30 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     }
     
     @Override
+    public boolean existeUsuario(String nombreUsuario){
+        boolean existe=false;
+        String consulta;
+        List<Usuario> listaDeUsuarios;
+        
+        try 
+        {
+           consulta="FROM Usuario u WHERE u.user=?1";
+           Query query=em.createQuery(consulta);
+           query.setParameter(1, nombreUsuario);
+           listaDeUsuarios = query.getResultList();
+           
+           if(!listaDeUsuarios.isEmpty()) existe=true;
+           
+        } catch (Exception e) 
+        {
+            System.out.println("No hemos podido consultar la base de datos");
+        }
+        
+        return(existe);
+    }
+    
+    
+    @Override
     public Usuario obtenerUsuario(Usuario usuario){
         
         Usuario user = null;

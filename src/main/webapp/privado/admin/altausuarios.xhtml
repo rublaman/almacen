@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template/plantilla.xhtml">
+
+            <ui:define name="content">
+                
+                <h:form>
+                    
+                    <h:outputScript library="js" name="calendario.js" />
+                    <p:growl keepAlive="3000" id="msgPrincipal" severity="info,fatal" showDetail="true" showSummary="true" />
+                    
+                    <p:fieldset legend="Datos personales del usario" >
+                
+                        <p:panelGrid columns="3" id="pgrPrimero" styleClass="ui-noborder" >
+
+                            <p:outputLabel value="Nombre:" for="txtNombre"/>
+                            <p:inputText id="txtNombre" value="#{altaUsuariosController.persona.nombre}" required="true" requiredMessage="El nombre es obligatorio" />
+                            <p:message for="txtNombre" />
+                            
+                            <p:outputLabel value="Primer apellido:" for="txtApellido1"/>
+                            <p:inputText id="txtApellido1" value="#{altaUsuariosController.persona.apellido1}" required="true" requiredMessage="El apellido 1 es obligatorio"/>
+                            <p:message for="txtApellido1" />
+
+                            <p:outputLabel value="Segundo apellido:" for="txtApellido2"/>
+                            <p:inputText id="txtApellido2" value="#{altaUsuariosController.persona.apellido2}" required="true" requiredMessage="El apellido 2 es obligatorio" />
+                            <p:column />
+                            
+                            <p:outputLabel for="cboSexo" value="Sexo:" />
+                            <p:selectOneMenu id="cboSexo" value="#{altaUsuariosController.persona.sexo}" style="width:125px">
+                                <f:selectItem itemLabel="Masculino" itemValue="M" />
+                                <f:selectItem itemLabel="Femenino" itemValue="F" />
+                            </p:selectOneMenu>
+                            <p:column />
+                            
+                            <p:outputLabel for="calendario" value="Fecha de nacimiento:" />
+                            <p:calendar id="calendario" value="#{altaUsuariosController.persona.fechaNacimiento}" showOn="button" locale="es" required="true" requiredMessage="La fecha es obligatorio" />
+                            <p:message for="calendario" />
+
+                        </p:panelGrid>
+                        
+                    </p:fieldset>
+                    
+                    <p:fieldset legend="Datos de acceso del usuario">
+                        
+                        <p:panelGrid columns="3" id="pgrSegundo" styleClass="ui-noborder">
+                            
+                            <p:outputLabel value="Nombre de usuario:" for="txtUsuario" />
+                            <p:inputText id="txtUsuario" value="#{altaUsuariosController.usuario.user}" required="true" requiredMessage="El usuario es obligatorio"/>
+                            <p:message for="txtUsuario" />
+
+                            <p:outputLabel value="Introduza password:" for="pass1" />
+                            <p:password id="pass1" value="#{altaUsuariosController.usuario.password}" 
+                                        match="pass2" validatorMessage="Las claves no coinciden" required="true" requiredMessage="El contraseña es obligatorio"/>
+                            <p:message for="pass1" />
+
+                            <p:outputLabel value="Repita la contraseña" for="pass2" />
+                            <p:password id="pass2" />
+                            <p:column />
+                            
+                            <p:outputLabel for="cboTipoUsuario" value="Tipo de usuario:" />
+                            <p:selectOneMenu id="cboTipoUsuario" value="#{altaUsuariosController.tipoSeleccionado}" dynamic="true" style="width:125px">
+                                <f:selectItems value="#{altaUsuariosController.listaDeTipos}"/>
+                            </p:selectOneMenu>
+                            
+                        </p:panelGrid>
+                        
+                    </p:fieldset>
+                    
+                    <p:commandButton value="Registrar" actionListener="#{altaUsuariosController.registrarUsuario()}" 
+                                             update="msgPrincipal, pgrPrimero, pgrSegundo"/>
+                
+                </h:form>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

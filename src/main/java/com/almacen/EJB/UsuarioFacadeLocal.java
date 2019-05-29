@@ -30,6 +30,8 @@ public interface UsuarioFacadeLocal {
 
     int count();
     
+    boolean existeUsuario(String nombreUsuario);
+    
     Usuario obtenerUsuario(Usuario usuario);
     
 }
