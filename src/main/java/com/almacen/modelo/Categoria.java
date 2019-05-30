@@ -48,17 +48,9 @@ public class Categoria implements Serializable{
         this.nombreCategoria = nombreCategoria;
     }
 
-    public boolean isValorada() {
-        return valorada;
-    }
-
-    public void setValorada(boolean valorada) {
-        this.valorada = valorada;
-    }
-
     @Override
     public String toString() {
-        return "Categoria{" + "idCategoria=" + idCategoria + ", nombreCategoria=" + nombreCategoria + ", valorada=" + valorada + '}';
+        return "Categoria{" + "idCategoria=" + idCategoria + ", nombreCategoria=" + nombreCategoria + '}';
     }
     
     

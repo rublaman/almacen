@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template/plantilla.xhtml">
+
+            <ui:define name="content">
+                
+                <h:form>
+                    <p:growl keepAlive="3000" id="msgPrincipal" severity="info,fatal" showDetail="true" showSummary="true" />
+                    <p:fieldset legend="Creacion de categorias" >
+                
+                        <p:panelGrid columns="3" id="pgrPrimero" styleClass="ui-noborder" >
+
+                            <p:outputLabel value="Nombre categoria:" for="txtNombre"/>
+                            <p:inputText id="txtNombre" value="#{altaCategoriaController.categoria.nombreCategoria}" required="true" requiredMessage="El nombre es obligatorio" />
+                            <p:message for="txtNombre" />
+                            
+                        </p:panelGrid>
+                        
+                    </p:fieldset>
+                                       
+                    <p:commandButton value="Crear" actionListener="#{altaCategoriaController.crearCategoria()}" 
+                                             update="msgPrincipal, pgrPrimero"/>
+                
+                </h:form>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

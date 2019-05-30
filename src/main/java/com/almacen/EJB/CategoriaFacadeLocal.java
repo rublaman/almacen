@@ -30,4 +30,6 @@ public interface CategoriaFacadeLocal {
 
     int count();
     
+    boolean existeCategoria(String nombreCategoria);
+    
 }

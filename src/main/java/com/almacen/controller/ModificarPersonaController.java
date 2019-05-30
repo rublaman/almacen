@@ -6,7 +6,9 @@
 package com.almacen.controller;
 
 import com.almacen.EJB.PersonaFacadeLocal;
+import com.almacen.EJB.UsuarioFacadeLocal;
 import com.almacen.modelo.Persona;
+import com.almacen.modelo.Usuario;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -27,10 +29,16 @@ public class ModificarPersonaController implements Serializable{
     @EJB
     private PersonaFacadeLocal personaEJB;
     
+   /* @EJB
+    private UsuarioFacadeLocal usuarioEJB;*/
+    
     private List<Persona> listaPersonas;
     
     @Inject
     private Persona personaSeleccionada;
+    
+    /*@Inject
+    private Usuario usuarioSeleccionado;*/
     
     @PostConstruct
     public void init(){
@@ -50,6 +58,11 @@ public class ModificarPersonaController implements Serializable{
     public Persona getPersonaSeleccionada() {
         return personaSeleccionada;
     }
+    
+    /*public Usuario getUsuarioSeleccionada() {
+        usuarioSeleccionado = 
+        return usuarioSeleccionado;
+    }*/
 
     public void setPersonaSeleccionada(Persona personaSeleccionada) {
         this.personaSeleccionada = personaSeleccionada;
@@ -64,6 +77,9 @@ public class ModificarPersonaController implements Serializable{
     }
     
     public void eliminarPersona(){
+       /* String consulta="FROM Usuario u WHERE u.idpersona = ?1 and u.password = ?2";
+        
+        usuarioEJB.remove(null);*/
         personaEJB.remove(personaSeleccionada);
     }
 }
