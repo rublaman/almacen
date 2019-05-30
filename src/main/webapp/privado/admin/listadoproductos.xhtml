@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template/plantilla.xhtml">
+
+            <ui:define name="content">
+                <h1>Listado de Productos</h1>
+            
+                <h:form id="frmPrincipal">
+
+                    <p:dataTable id="tablaProductos" var="prd" value="#{modificarProductosController.listaProductos}" 
+                                rows="10"
+                                paginator="true"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                rowsPerPageTemplate="5,10,15">
+                        <p:column headerText="Producto">
+                            <h:outputText value="#{prd.nombreprod}" />
+                        </p:column>
+
+                        <p:column headerText="Descripción">
+                            <h:outputText value="#{prd.descripcion}" />
+                        </p:column>
+                        
+                        <p:column headerText="Precio">
+                            <h:outputText value="#{prd.precio} €" />
+                        </p:column>
+
+                        <p:column headerText="Categoria">
+                            <h:outputText value="#{prd.categoria.nombreCategoria}" />
+                        </p:column>
+                        
+                        <p:column headerText="Imagen">
+                            <h:graphicImage value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/img/#{prd.imagen}" style="width:100px;height:100px;" />
+                        </p:column>
+
+                    </p:dataTable>
+
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

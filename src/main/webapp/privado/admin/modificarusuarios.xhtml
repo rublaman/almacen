@@ -14,30 +14,38 @@
             
                 <h:form id="frmPrincipal">
 
-                    <p:dataTable id="tablaPersonas" var="per" value="#{modificarPersonaController.listaPersonas}" 
+                    <p:dataTable id="tablaPersonas" var="usr" value="#{modificarUsuarioController.listaUsuarios}" 
                                 rows="10"
                                 paginator="true"
                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                 rowsPerPageTemplate="5,10,15">
+                        <p:column headerText="Usuario">
+                            <h:outputText value="#{usr.user}" />
+                        </p:column>
+
+                        <p:column headerText="Contraseña">
+                            <h:outputText value="#{usr.password}" />
+                        </p:column>
+                        
                         <p:column headerText="Nombre">
-                            <h:outputText value="#{per.nombre}" />
+                            <h:outputText value="#{usr.persona.nombre}" />
                         </p:column>
 
                         <p:column headerText="Apellido 1">
-                            <h:outputText value="#{per.apellido1}" />
+                            <h:outputText value="#{usr.persona.apellido1}" />
                         </p:column>
 
                         <p:column headerText="Apellido 2">
-                            <h:outputText value="#{per.apellido2}" />
+                            <h:outputText value="#{usr.persona.apellido2}" />
                         </p:column>
 
                         <p:column headerText="Modificar">
-                            <p:commandButton value="Modificar" actionListener="#{modificarPersonaController.establecerPersona(per)}" 
+                            <p:commandButton value="Modificar" actionListener="#{modificarUsuarioController.establecerUsuario(usr)}" 
                                              oncomplete="PF('wdialogo1').show();" update="frmDialogo1"/>
                         </p:column>
 
                         <p:column headerText="Eliminar">
-                            <p:commandButton value="Eliminar" actionListener="#{modificarPersonaController.establecerPersona(per)}" 
+                            <p:commandButton value="Eliminar" actionListener="#{modificarUsuarioController.establecerUsuario(usr)}" 
                                              oncomplete="PF('wdialogo2').show();" update="frmDialogo2"/>
                         </p:column>
                     </p:dataTable>
@@ -49,15 +57,21 @@
                         <p:panelGrid columns="2">
 
                             <p:outputLabel value="Nombre" />
-                            <p:inputText value="#{modificarPersonaController.personaSeleccionada.nombre}"/>
+                            <p:inputText value="#{modificarUsuarioController.usuarioSeleccionado.persona.nombre}"/>
 
                             <p:outputLabel value="Primer apellido" />
-                            <p:inputText value="#{modificarPersonaController.personaSeleccionada.apellido1}"/>
+                            <p:inputText value="#{modificarUsuarioController.usuarioSeleccionado.persona.apellido1}"/>
 
                             <p:outputLabel value="Segundo apellido" />
-                            <p:inputText value="#{modificarPersonaController.personaSeleccionada.apellido2}"/>
+                            <p:inputText value="#{modificarUsuarioController.usuarioSeleccionado.persona.apellido2}"/>
+                            
+                            <p:outputLabel value="Usuario" />
+                            <p:inputText value="#{modificarUsuarioController.usuarioSeleccionado.user}"/>
 
-                            <p:commandButton value="Actualizar" actionListener="#{modificarPersonaController.actualizarPersona()}"
+                            <p:outputLabel value="Contraseña" />
+                            <p:inputText value="#{modificarUsuarioController.usuarioSeleccionado.password}"/>
+
+                            <p:commandButton value="Actualizar" actionListener="#{modificarUsuarioController.actualizarUsuario()}"
                                              oncomplete="PF('wdialogo1').hide();" update=":frmPrincipal:tablaPersonas"/>
                             <p:commandButton value="Cancelar" onclick="PF('wdialogo1').hide();" />
 
@@ -70,7 +84,7 @@
                         <p:panelGrid columns="2">
                             <p:outputLabel value="¿Estás seguro de eliminar al usuario?" />
                             <p:column></p:column>
-                            <p:commandButton value="Aceptar" actionListener="#{modificarPersonaController.eliminarPersona()}"
+                            <p:commandButton value="Aceptar" actionListener="#{modificarUsuarioController.eliminarUsuario()}"
                                              oncomplete="PF('wdialogo2').hide();" update=":frmPrincipal:tablaPersonas" />
                             <p:commandButton value="Cancelar" onclick="PF('wdialogo2').hide();"/>
                         </p:panelGrid>                

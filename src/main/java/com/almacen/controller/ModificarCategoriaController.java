@@ -57,5 +57,6 @@ public class ModificarCategoriaController implements Serializable{
     
     public void eliminarCategoria(){
         categoriaEJB.remove(categoriaSeleccionada);
+        listaCategorias.remove(categoriaSeleccionada);
     }
 }

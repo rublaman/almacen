@@ -43,7 +43,7 @@ public class Usuario implements Serializable{
     
     //  @JoinColumn(name="idPersona", nullable=false)
     @JoinColumn(name="idPersona", nullable=false)
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Persona persona;
     
     @JoinColumn(name="idRol")
