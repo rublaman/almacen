@@ -8,6 +8,7 @@ package com.almacen.modelo;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,17 +41,9 @@ public class Producto implements Serializable{
       
     @Column(name="precio")
     private int precio;
-
-    @Column(name="fecha")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaPublicacion;
     
     @Column(name="imagen")
     private String imagen;
-    
-    @JoinColumn(name="idPersona")
-    @ManyToOne
-    private Persona persona;
     
     @JoinColumn(name="idCategoria")
     @ManyToOne
@@ -88,28 +81,12 @@ public class Producto implements Serializable{
         this.precio = precio;
     }
 
-    public Date getFechaPublicacion() {
-        return fechaPublicacion;
-    }
-
-    public void setFechaPublicacion(Date fechaPublicacion) {
-        this.fechaPublicacion = fechaPublicacion;
-    }
-
     public String getImagen() {
         return imagen;
     }
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
-    }
-
-    public Persona getPersona() {
-        return persona;
-    }
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
     }
 
     public Categoria getCategoria() {
@@ -127,9 +104,7 @@ public class Producto implements Serializable{
         hash = 97 * hash + Objects.hashCode(this.nombreprod);
         hash = 97 * hash + Objects.hashCode(this.descripcion);
         hash = 97 * hash + this.precio;
-        hash = 97 * hash + Objects.hashCode(this.fechaPublicacion);
         hash = 97 * hash + Objects.hashCode(this.imagen);
-        hash = 97 * hash + Objects.hashCode(this.persona);
         hash = 97 * hash + Objects.hashCode(this.categoria);
         return hash;
     }
@@ -155,13 +130,7 @@ public class Producto implements Serializable{
         if (this.precio != other.precio) {
             return false;
         }
-        if (!Objects.equals(this.fechaPublicacion, other.fechaPublicacion)) {
-            return false;
-        }
         if (!Objects.equals(this.imagen, other.imagen)) {
-            return false;
-        }
-        if (!Objects.equals(this.persona, other.persona)) {
             return false;
         }
         if (!Objects.equals(this.categoria, other.categoria)) {
@@ -172,7 +141,7 @@ public class Producto implements Serializable{
 
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", nombreprod=" + nombreprod + ", descripcion=" + descripcion + ", precio=" + precio + ", fechaPublicacion=" + fechaPublicacion + ", imagen=" + imagen + ", persona=" + persona + ", categoria=" + categoria + '}';
+        return "Producto{" + "idProducto=" + idProducto + ", nombreprod=" + nombreprod + ", descripcion=" + descripcion + ", precio=" + precio + ", imagen=" + imagen + ", categoria=" + categoria + '}';
     }
 
     

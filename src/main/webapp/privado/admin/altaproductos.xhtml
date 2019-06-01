@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template/plantilla.xhtml">
+
+            <ui:define name="content">
+                <h1>Alta de Productos</h1>
+                
+                <h:form>
+
+                    <p:growl keepAlive="3000" id="msgPrincipal" severity="info,fatal" showDetail="true" showSummary="true" />
+                    
+                    <p:fieldset legend="Datos del producto" >
+                
+                        <p:panelGrid columns="3" id="pgrPrimero" styleClass="ui-noborder" >
+
+                            <p:outputLabel value="Nombre producto" for="txtNombre"/>
+                            <p:inputText id="txtNombre" value="#{altaProductosController.producto.nombreprod}" required="true" requiredMessage="El nombre es obligatorio" />
+                            <p:message for="txtNombre" />
+                            
+                            <p:outputLabel value="Descripcion" for="txtApellido1"/>
+                            <p:inputText id="txtApellido1" value="#{altaProductosController.producto.descripcion}" required="true" requiredMessage="La descripcion es obligatorio"/>
+                            <p:message for="txtApellido1" />
+
+                            <p:outputLabel value="Precio" for="txtApellido2"/>
+                            <p:inputText id="txtApellido2" value="#{altaProductosController.producto.precio}" required="true" requiredMessage="El precio es obligatorio" />
+                            <p:column />
+                            
+                            <p:outputLabel value="Imagen" for="txtImg"/>
+                            <p:inputText id="txtImg" value="#{altaProductosController.producto.imagen}" required="true" requiredMessage="La imagen es obligatoria" />
+                            <p:column />
+                            
+                            <p:outputLabel for="cboTipoUsuario" value="Tipo de usuario:" />
+                            <p:selectOneMenu id="cboTipoUsuario" value="#{altaProductosController.tipoSeleccionado}" dynamic="true" style="width:125px">
+                                <f:selectItems value="#{altaProductosController.listaDeCategorias}"/>
+                            </p:selectOneMenu>
+
+                        </p:panelGrid>
+                        
+                    </p:fieldset>
+                    
+                    <p:commandButton value="Crear" actionListener="#{altaProductosController.registrarProducto()}" 
+                                             update="msgPrincipal, pgrPrimero"/>
+                
+                </h:form>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
